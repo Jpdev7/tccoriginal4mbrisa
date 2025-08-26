@@ -2,6 +2,7 @@ package com.brisa4m.demo.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +35,10 @@ public class  UsersController {
    @PutMapping("update/{id}")
    public ResponseEntity<String> updateUser(@RequestBody UserModel userModel, HttpServletRequest request, @PathVariable String id) {
      return ResponseEntity.status(HttpStatus.CREATED).body(id);
+  }
+
+  @DeleteMapping("delete/{id}")
+  public ResponseEntity<String> deleteUser(@RequestBody UserModel userModel, HttpServletRequest request, @PathVariable String id) {
+     return ResponseEntity.status(HttpStatus.ACCEPTED).body(id);
   }
 }
