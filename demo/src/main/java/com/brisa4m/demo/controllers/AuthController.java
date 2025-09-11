@@ -31,7 +31,7 @@ public class AuthController {
     @PostMapping("/login/create")
     public ResponseEntity<LoginResponse> createLogin(@RequestBody LoginRequest req) {
         try {
-            LoginResponse res = authService.login(req);
+            LoginResponse res = authService.createUser(req);
             return ResponseEntity.ok(res);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage()));
