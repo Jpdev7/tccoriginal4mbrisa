@@ -1,5 +1,6 @@
 package com.brisa4m.demo.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,16 +11,15 @@ import com.brisa4m.demo.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-   private final UserRepository repository;
-
    // Construtor: mesmo nome da classe (UserController)
-   public UserController(UserRepository repository) {
-      this.repository = repository;
-   }
+   @Autowired
+   private UserRepository repository;
 
    @GetMapping("")
    public ResponseEntity<List<UserModel>> users() {
@@ -27,8 +27,11 @@ public class UserController {
    }
 
    @PostMapping("/create")
-   public ResponseEntity<String> createUser(@RequestBody UserModel userModel, HttpServletRequest request) {
-      return ResponseEntity.status(HttpStatus.CREATED).body("Usuario Entrou na brisa");
+   public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel, HttpServletRequest request) {
+      var encoder = new BCryptPasswordEncoder();
+      var hashedPassword = encoder.encode(userModel.getPassword());
+      userModel.setPassword(hashedPassword);
+      return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
    }
 
    @PutMapping("update/{id}")

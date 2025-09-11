@@ -6,3 +6,13 @@ CREATE TABLE users(
 	email VARCHAR(255) NOT NULL UNIQUE,
 	password VARCHAR(255) NOT NULL
 );
+
+
+- INSTALAR PACKAGES
+
+mvn clean install 
+
+
+- RODAR O PROGRAMA
+
+mvn spring-boot:run
