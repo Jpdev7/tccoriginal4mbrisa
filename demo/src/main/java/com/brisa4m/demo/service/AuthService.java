@@ -1,6 +1,7 @@
 package com.brisa4m.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,38 @@ public class AuthService {
     public LoginResponse login(LoginRequest req) {
         UserModel user = userRepository.findByEmail(req.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
-        if (!checkPasswordHashs(req.getPassword(), user.getPassword()))
+        System.out.print(checkPasswordHash(req.getPassword(), user.getPassword()));
+        if (!checkPasswordHash(req.getPassword(), user.getPassword()))
             throw new RuntimeException("Senha incorreta");
 
-        return new LoginResponse("Usuario autorizado!");
+        return new LoginResponse("Usuario logado com sucesso!");
     }
 
-    private boolean checkPasswordHashs(String normalPssword, String hashedPassword) {
+    public LoginResponse createUser(LoginRequest req) {
+        UserModel user = userRepository.findByEmail(req.getEmail()).orElse(null);
+
+        if (user != null) {
+            throw new RuntimeException("Email ja existe");
+        }
+
+        req.setPassword(hashPassword(req.getPassword()));
+        UserModel newUser = new UserModel(req.getName(), req.getEmail(), req.getPassword());
+        userRepository.save(newUser);
+
+        return new LoginResponse("Usuario criado com sucesso!");
+    }
+
+    private boolean checkPasswordHash(String normalPssword, String hashedPassword) {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-        boolean passwordChecked = bc.matches(hashedPassword, hashedPassword);
+        boolean passwordChecked = bc.matches(normalPssword, hashedPassword);
 
         return passwordChecked;
     }
 
+    private String hashPassword(String normalPssword) {
+        String salt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(normalPssword, salt);
+
+        return hashedPassword;
+    }
 }
