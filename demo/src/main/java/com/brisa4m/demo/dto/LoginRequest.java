@@ -1,16 +1,25 @@
 package com.brisa4m.demo.dto;
 
-public class LoginRequest {
-    private String name;
-    private String email;
-    private String password;
+import java.time.LocalDate;
 
-    public String getName() {
-        return name;
+// - LoginRequest: representa os dados que o usuário envia ao tentar logar (nome, email, senha, etc).
+
+public class LoginRequest {
+    private String nome;
+    private String email;
+    private String senha;
+    private String nivel_acesso;
+    private String cpf;
+    private String status_usuario;
+    private String telefone;
+    private LocalDate data_nascimento;
+
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -21,11 +30,51 @@ public class LoginRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getNivelAcesso() {
+        return nivel_acesso;
+    }
+
+    public void setNivelAcesso(String nivel_acesso) {
+        this.nivel_acesso = nivel_acesso;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getStatusUsuario() {
+        return status_usuario;
+    }
+
+    public void setStatusUsuario(String status_usuario) {
+        this.status_usuario = status_usuario;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public LocalDate getDataNascimento() {
+        return data_nascimento;
+    }
+
+    public void setDataNascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 }
