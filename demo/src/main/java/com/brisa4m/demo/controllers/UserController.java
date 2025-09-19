@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import com.brisa4m.demo.models.UserModel;
 import com.brisa4m.demo.repositories.UserRepository;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequestMapping("/users")
 public class UserController {
 
-   // Construtor: mesmo nome da classe (UserController)
    @Autowired
    private UserRepository repository;
 
@@ -27,21 +25,25 @@ public class UserController {
    }
 
    @PostMapping("/create")
-   public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel, HttpServletRequest request) {
+   public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel) {
       var encoder = new BCryptPasswordEncoder();
-      var hashedPassword = encoder.encode(userModel.getPassword());
-      userModel.setPassword(hashedPassword);
+      var hashedPassword = encoder.encode(userModel.getSenha());
+
+      userModel.setSenha(hashedPassword);
+      userModel.setNivel_acesso("USER");
+      userModel.setStatus_usuario("ATIVO");
+      repository.save(userModel);
       return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
    }
 
    @PutMapping("update/{id}")
-   public ResponseEntity<String> updateUser(@RequestBody UserModel userModel, HttpServletRequest request,
+   public ResponseEntity<String> updateUser(@RequestBody UserModel userModel,
          @PathVariable String id) {
       return ResponseEntity.status(HttpStatus.CREATED).body(id);
    }
 
    @DeleteMapping("delete/{id}")
-   public ResponseEntity<String> deleteUser(@RequestBody UserModel userModel, HttpServletRequest request,
+   public ResponseEntity<String> deleteUser(@RequestBody UserModel userModel,
          @PathVariable String id) {
       return ResponseEntity.status(HttpStatus.ACCEPTED).body(id);
    }

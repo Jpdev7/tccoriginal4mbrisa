@@ -1,17 +1,11 @@
 package com.brisa4m.demo.dto;
 
+// - LoginRequest: representa os dados que o usuário envia ao tentar logar (nome, email, senha, etc).
+
 public class LoginRequest {
-    private String name;
     private String email;
-    private String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String senha;
+    private String cpf;
 
     public String getEmail() {
         return email;
@@ -21,11 +15,19 @@ public class LoginRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

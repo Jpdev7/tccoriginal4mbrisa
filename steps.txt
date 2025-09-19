@@ -8,6 +8,13 @@ CREATE TABLE users(
 );
 
 
+- SETANDO USUARIO
+
+USE HotelDBB;
+GO
+CREATE USER pedrita_login FOR LOGIN pedrita_login;
+ALTER ROLE db_owner ADD MEMBER pedrita_login;
+
 - INSTALAR PACKAGES
 
 mvn clean install 

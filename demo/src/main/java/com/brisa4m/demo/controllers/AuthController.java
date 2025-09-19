@@ -15,6 +15,7 @@ import com.brisa4m.demo.service.AuthService;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
     @Autowired
     private AuthService authService;
 
@@ -22,16 +23,6 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest req) {
         try {
             LoginResponse res = authService.login(req);
-            return ResponseEntity.ok(res);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage()));
-        }
-    }
-
-    @PostMapping("/login/create")
-    public ResponseEntity<LoginResponse> createLogin(@RequestBody LoginRequest req) {
-        try {
-            LoginResponse res = authService.createUser(req);
             return ResponseEntity.ok(res);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage()));
