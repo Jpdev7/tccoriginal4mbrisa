@@ -30,8 +30,8 @@ public class UserController {
       var hashedPassword = encoder.encode(userModel.getSenha());
 
       userModel.setSenha(hashedPassword);
-      userModel.setNivelAcesso("USER");
-      userModel.setStatusUsuario("ATIVO");
+      userModel.setNivel_acesso("USER");
+      userModel.setStatus_usuario("ATIVO");
       repository.save(userModel);
       return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
    }
