@@ -1,0 +1,5 @@
+O que são DTOs?
+
+DTO (Data Transfer Object) é como uma caixinha usada para transportar dados entre diferentes partes do sistema (ex: entre backend e frontend).
+Não tem “lógica pesada”, apenas guarda e entrega dados.
+Em Python, é como se fosse uma classe simples ou até um dataclass.

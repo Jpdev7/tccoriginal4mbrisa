@@ -1,0 +1,5 @@
+O que é um Service?
+
+No Spring, o Service é como o cérebro da aplicação.
+Ele pega os dados dos DTOs, conversa com o repositório (banco de dados) e aplica a regra de negócio.
+Em Python, seria como uma classe de serviço ou até uma função isolada que faz a lógica de login.
