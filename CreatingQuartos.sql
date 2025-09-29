@@ -1,0 +1,8 @@
+USE HotelDBB;
+
+CREATE TABLE Quartos(
+	id_quarto BIGINT IDENTITY(1,1) PRIMARY KEY,
+	numero INT NOT NULL UNIQUE,
+	preco_diaria DECIMAL(10,2) NOT NULL,
+	status VARCHAR(20) NOT NULL
+)
