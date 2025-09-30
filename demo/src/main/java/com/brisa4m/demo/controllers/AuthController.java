@@ -23,7 +23,7 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest req) {
         try {
             LoginResponse res = authService.login(req);
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(res);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage()));
         }

@@ -1,7 +1,7 @@
 USE HotelDBB;
 
 CREATE TABLE Usuario(
-	[id_usuario] BIGINT IDENTITY(1,1) NOT NULL,
+	[id_usuario] BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[nome] [varchar](255) NOT NULL,
 	[email] [varchar](255) NOT NULL UNIQUE,
 	[senha] [varchar](255) NULL,

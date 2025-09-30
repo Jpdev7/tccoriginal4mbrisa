@@ -27,19 +27,8 @@ public class UserModel {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate data_nascimento;
 
+    // O construtor vazio existe para o JPA/Hibernate funcionar corretamente.
     public UserModel() {
-    }
-
-    public UserModel(String nome, String email, String senha, String nivel_acesso, String cpf, String status_usuario,
-            String telefone, LocalDate data_nascimento) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.nivel_acesso = nivel_acesso;
-        this.cpf = cpf;
-        this.status_usuario = status_usuario;
-        this.telefone = telefone;
-        this.data_nascimento = data_nascimento;
     }
 
     public Long getId_usuario() {
