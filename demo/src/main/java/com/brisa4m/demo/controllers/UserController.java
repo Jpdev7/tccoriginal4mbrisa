@@ -17,10 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserController {
 
    @Autowired
-   private UserRepository repository;
+   UserRepository repository;
 
    @GetMapping("")
-   public ResponseEntity<List<UserModel>> users() {
+   public ResponseEntity<List<UserModel>> getAllUsers() {
       return ResponseEntity.status(HttpStatus.CREATED).body(this.repository.findAll());
    }
 
@@ -32,7 +32,7 @@ public class UserController {
       userModel.setSenha(hashedPassword);
       userModel.setNivel_acesso("USER");
       userModel.setStatus_usuario("ATIVO");
-      repository.save(userModel);
+      this.repository.save(userModel);
       return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
    }
 
